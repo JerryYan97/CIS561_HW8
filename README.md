@@ -3,18 +3,18 @@ Jiarui Yan(jiaruiya) HW8 Test Result:
 
 Building k-d tree:
 -------------
-![](./KDTree/KD_Result/KdTreeVisiulization.png)
+![](./KDTree/KD_Result/KdTreeVisiulization.PNG)
 
 k-d Tree Intersection Functions and other tests:
 -------------
 
 ### random:
 
-![](./KDTree/KD_Result/PointsSearch.png)
+![](./KDTree/KD_Result/PointsSearch.PNG)
 
 ### grid:
 
-![](./KDTree/KD_Result/PointsSearchGrid.png)
+![](./KDTree/KD_Result/PointsSearchGrid.PNG)
 
 Thin-Lens Camera:
 -------------
