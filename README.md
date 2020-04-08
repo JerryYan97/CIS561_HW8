@@ -35,3 +35,7 @@ Constructive Solid Geometry:
 ### Differ:
 
 ![](./PathTracer/CIS461_HW7-master/RenderedResult/CSGDiffer.png)
+
+### Multiple:
+
+![](./PathTracer/CIS461_HW7-master/RenderedResult/CSGMultiple.png)
