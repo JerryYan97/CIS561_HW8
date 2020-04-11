@@ -39,3 +39,8 @@ Constructive Solid Geometry:
 ### Multiple:
 
 ![](./PathTracer/CIS461_HW7-master/RenderedResult/CSGMultiple.png)
+
+Extra Credit (Distant Light):
+-------------
+
+![](./PathTracer/CIS461_HW7-master/RenderedResult/DistantLight.png)
