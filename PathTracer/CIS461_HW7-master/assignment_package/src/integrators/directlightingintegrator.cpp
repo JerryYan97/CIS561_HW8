@@ -1,6 +1,7 @@
 #include "directlightingintegrator.h"
 #include <scene/lights/pointlight.h>
 #include <scene/lights/spotlight.h>
+#include <scene/lights/distantlight.h>
 #include <iostream>
 
 float BalanceHeuristic(int nf, Float fPdf, int ng, Float gPdf)
@@ -68,10 +69,22 @@ Color3f DirectLightingIntegrator::Li(const Ray &ray, const Scene &scene, std::sh
     Light* lightPtr = light.get();
     PointLight* pLightPtr = dynamic_cast<PointLight*>(lightPtr);
     SpotLight* spLightPtr = dynamic_cast<SpotLight*>(lightPtr);
-    if(pLightPtr || spLightPtr)
+    DistantLight* disLightPtr = dynamic_cast<DistantLight*>(lightPtr);
+    if(pLightPtr || spLightPtr || disLightPtr)
     {
-        // Shadow Test from point light to the reference point:
-        Ray tempRay = Ray(lightPtr->transform.position(), -wi);
+        Ray tempRay(Vector3f(0, 0, 0), Vector3f(0, 0, 0));
+
+        if(pLightPtr || spLightPtr)
+        {
+            // Shadow Test from point light to the reference point:
+            tempRay = Ray(lightPtr->transform.position(), -wi);
+        }
+        else if(disLightPtr)
+        {
+            // Shadow Test from a point 2 radius away to the reference point:
+            tempRay = Ray(isect.point + 2.f * wi * disLightPtr->worldRadius, -wi);
+        }
+
         Intersection tempInsect;
         if(!scene.Intersect(tempRay, &tempInsect))
         {

@@ -9,6 +9,7 @@
 #include <scene/lights/diffusearealight.h>
 #include <scene/lights/pointlight.h>
 #include <scene/lights/spotlight.h>
+#include <scene/lights/distantlight.h>
 
 
 Scene::Scene()
@@ -102,8 +103,6 @@ void Scene::CreateTestScene()
     ceilingPrim->material = matteWhite;
     ceilingPrim->name = QString("Ceiling");
 
-
-    /*
     // Long cube
     auto longCube = std::make_shared<Cube>();
     longCube->transform = Transform(Vector3f(2, 0, 3), Vector3f(0, 27.5, 0), Vector3f(3, 6, 3));
@@ -117,7 +116,7 @@ void Scene::CreateTestScene()
     auto shortCubePrim = std::make_shared<Primitive>(shortCube);
     shortCubePrim->material = matteWhite;
     shortCubePrim->name = QString("Short Cube");
-    */
+
 
 /*
     auto longCube = std::make_shared<Cube>();
@@ -132,7 +131,7 @@ void Scene::CreateTestScene()
     spherePrim->material = matteWhite;
     spherePrim->name = QString("Sphere");
  */
-
+/*
     // CSG:
     auto longCube1 = std::make_shared<Cube>();
     longCube1->transform = Transform(Vector3f(0, 0, 0), Vector3f(90, 0, -27.5), Vector3f(3, 6, 3));
@@ -145,9 +144,9 @@ void Scene::CreateTestScene()
     auto csgCube2 = std::make_shared<CSGNode>();
     csgCube2->mType = GEOMETRY;
     csgCube2->selfGeo =longCube2.get();
-
+*/
     // Large sphere:
-    auto sphere = std::make_shared<Sphere>();
+    /*auto sphere = std::make_shared<Sphere>();
     sphere->transform = Transform(Vector3f(0, 0, 0), Vector3f(0, 0, 0), Vector3f(3, 3, 3));
     auto csgSphere = std::make_shared<CSGNode>();
     csgSphere->mType = GEOMETRY;
@@ -165,12 +164,12 @@ void Scene::CreateTestScene()
     csgLeftDiffer->leftChild = csgCube2.get();
     csgLeftDiffer->rightChild = csgCube3.get();
 
-    /*
+
     auto csgRightUnion = std::make_shared<CSGNode>();
     csgRightUnion->mType = UNION;
     csgRightUnion->leftChild = csgCube2.get();
     csgRightUnion->rightChild = csgCube1.get();
-    */
+
 
     auto csgRoot = std::make_shared<CSGNode>();
     csgRoot->mType = INTERSECT;
@@ -192,7 +191,7 @@ void Scene::CreateTestScene()
 
     CSGShapes.append(sphere);
     CSGShapes.append(csgSphere);
-
+*/
 /*
     auto longCube1 = std::make_shared<Cube>();
     longCube1->transform = Transform(Vector3f(0, 0, 0), Vector3f(90, 0, -27.5), Vector3f(3, 6, 3));
@@ -214,15 +213,18 @@ void Scene::CreateTestScene()
 
     // Light source, which is a diffuse area light with a large plane as its shape
     auto lightSquare = std::make_shared<SquarePlane>();
-    lightSquare->transform = Transform(Vector3f(0,7.45f,0), Vector3f(90,0,0), Vector3f(3, 3, 1));
-    auto lightSource = std::make_shared<DiffuseAreaLight>(lightSquare->transform, Color3f(17,12,4) * 2.f, lightSquare);
-    auto lightPrim = std::make_shared<Primitive>(lightSquare, nullptr, lightSource);
+    // lightSquare->transform = Transform(Vector3f(0,7.45f,0), Vector3f(90,0,0), Vector3f(3, 3, 1));
+    // auto lightSource = std::make_shared<DiffuseAreaLight>(lightSquare->transform, Color3f(17,12,4) * 2.f, lightSquare);
+    // auto lightPrim = std::make_shared<Primitive>(lightSquare, nullptr, lightSource);
+
     // auto pointLightSource = std::make_shared<PointLight>(lightSquare->transform, Color3f(17,12,4) * 4.f);
     // auto SpotLightSource = std::make_shared<SpotLight>(lightSquare->transform, Color3f(17,12,4) * 4.f, 30, 25);
     // lightPrim->name = QString("Light Source");
 
+    auto distantLightSource = std::make_shared<DistantLight>(Transform(Point3f(16, 20, -20), Vector3f(0,0,0), Vector3f(1, 1, 1)), Color3f(17,12,4) * 30.f, Vector3f(-0.2, -0.2, 1), 100.f);
+
     primitives.append(floorPrim);
-    primitives.append(lightPrim);
+    // primitives.append(lightPrim);
     primitives.append(leftWallPrim);
     primitives.append(rightWallPrim);
     primitives.append(backWallPrim);
@@ -232,13 +234,14 @@ void Scene::CreateTestScene()
     // primitives.append(longCubePrim);
     // primitives.append(spherePrim);
 
-    primitives.append(csgPrim);
-    // primitives.append(longCubePrim);
-    // primitives.append(shortCubePrim);
+    // primitives.append(csgPrim);
+    primitives.append(longCubePrim);
+    primitives.append(shortCubePrim);
 
-    lights.append(lightSource);
+    // lights.append(lightSource);
     // lights.append(pointLightSource);
     // lights.append(SpotLightSource);
+    lights.append(distantLightSource);
 
 
     for(std::shared_ptr<Primitive> p : primitives)

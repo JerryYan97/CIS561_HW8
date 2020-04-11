@@ -8,6 +8,7 @@ SOURCES += \
     $$PWD/mygl.cpp \
     $$PWD/scene/camera.cpp \
     $$PWD/scene/geometry/csg.cpp \
+    $$PWD/scene/lights/distantlight.cpp \
     $$PWD/scene/lights/pointlight.cpp \
     $$PWD/scene/lights/spotlight.cpp \
     $$PWD/scene/materials/microfacetbtdf.cpp \
@@ -62,6 +63,7 @@ HEADERS += \
     $$PWD/la.h \
     $$PWD/drawable.h \
     $$PWD/scene/geometry/csg.h \
+    $$PWD/scene/lights/distantlight.h \
     $$PWD/scene/lights/pointlight.h \
     $$PWD/scene/lights/spotlight.h \
     $$PWD/scene/materials/microfacetbtdf.h \
