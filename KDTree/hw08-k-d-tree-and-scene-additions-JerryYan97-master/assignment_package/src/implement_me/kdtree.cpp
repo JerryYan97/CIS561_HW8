@@ -354,8 +354,28 @@ void KDTree::reportSubTree(KDNode *v, std::vector<glm::vec3> &reportedPoints)
     }
 }
 
-void KDTree::searchKdTree(KDNode* v, std::vector<glm::vec3>& reportedPoints,glm::vec3 c, float r)
+void KDTree::searchKdTree(KDNode* v, std::vector<glm::vec3>& reportedPoints, glm::vec3 c, float r)
 {
+    if (v->particles.size() != 0 && (v->leftChild == nullptr && v->rightChild == nullptr))
+    {
+        if(glm::distance(*v->particles[0], c) <= r)
+        {
+            reportedPoints.push_back(*v->particles[0]);
+        }
+    }
+    else
+    {
+        if(doesCubeIntersectSphere(v->leftChild->minCorner, v->leftChild->maxCorner, c, r))
+        {
+            searchKdTree(v->leftChild, reportedPoints, c, r);
+        }
+        if(doesCubeIntersectSphere(v->rightChild->minCorner, v->rightChild->maxCorner, c, r))
+        {
+            searchKdTree(v->rightChild, reportedPoints, c, r);
+        }
+    }
+
+    /* Old version (backup):
     if(v->particles.size() == 1)
     {
         reportSubTree(v, reportedPoints);
@@ -395,7 +415,7 @@ void KDTree::searchKdTree(KDNode* v, std::vector<glm::vec3>& reportedPoints,glm:
                 }
             }
         }
-    }
+    }*/
 }
 
 std::vector<glm::vec3> KDTree::particlesInSphere(glm::vec3 c, float r)

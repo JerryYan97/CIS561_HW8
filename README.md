@@ -21,6 +21,18 @@ Thin-Lens Camera:
 
 ![](./PathTracer/CIS461_HW7-master/RenderedResult/ThinLens.png)
 
+Point Light:
+-------------
+
+![](./PathTracer/CIS461_HW7-master/RenderedResult/PointLight.png)
+
+
+Spot Light:
+-------------
+
+![](./PathTracer/CIS461_HW7-master/RenderedResult/SpotLight2.png)
+
+
 Constructive Solid Geometry:
 -------------
 
